@@ -1,11 +1,25 @@
 import Header from "./Header";
 import { Login_Img } from "../utils/imageUrls";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { validateData } from "../utils/validate";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  const name = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
 
   const toggleSignInForm = () => {
     setIsSignIn(!isSignIn);
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    console.log("55555555555");
+    const message = validateData(email.current.value, password.current.value);
+    setErrorMessage(message);
+    console.log(message);
   };
   return (
     <div>
@@ -19,22 +33,29 @@ const Login = () => {
         </h1>
         {!isSignIn && (
           <input
+            ref={name}
             type="text"
             placeholder="Full Name"
             className="my-4 p-2 bg-gray-600 w-full"
           />
         )}
         <input
+          ref={email}
           type="text"
           placeholder="Email Address"
           className="my-4 p-2 bg-gray-600 w-full"
         />
         <input
+          ref={password}
           type="password"
           placeholder="Password"
           className="my-4 p-2 bg-gray-600 w-full"
         />
-        <button className="my-6 p-2 bg-red-700 w-full rounded-lg">
+        <p className="text-red-700 font-bold">{errorMessage}</p>
+        <button
+          className="my-6 p-2 bg-red-700 w-full rounded-lg"
+          onClick={handleClick}
+        >
           {isSignIn ? "Sign in" : "Sign Up"}
         </button>
         <p className="py-4 cursor-pointer" onClick={toggleSignInForm}>
@@ -43,7 +64,6 @@ const Login = () => {
             : "New To Netflix? Sign Up Now"}
         </p>
       </form>
-      =
     </div>
   );
 };

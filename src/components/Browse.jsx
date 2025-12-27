@@ -1,20 +1,16 @@
 import Header from "./Header";
 import useNowPlayingMovies from "../hooks/useNowPlayinMovies";
+import usePopularMovies from "../hooks/usePopularMovies";
 import MainContainer from "./MainContainer";
+import SecondaryContainer from "./SecondaryContainer";
 const Browse = () => {
-  // const [movies, setMovies] = useState();
-  // const nowPlayingMovies = useSelector((state) => state.nowPlayingMovies);
   useNowPlayingMovies();
+  usePopularMovies();
   return (
     <div className="relative">
       <Header />
       <MainContainer />
-
-      <div>
-        {/* {nowPlayingMovies.map((movie) => (
-          <div key={movie.id}>{movie.id}</div>
-        ))} */}
-      </div>
+      <SecondaryContainer />
     </div>
   );
 };

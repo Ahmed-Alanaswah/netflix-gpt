@@ -1,5 +1,5 @@
 import Header from "./Header";
-import { Login_Img } from "../utils/imageUrls";
+import { Login_Img } from "../utils/constants";
 import { useRef, useState } from "react";
 import { validateData } from "../utils/validate";
 import {
@@ -8,13 +8,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { profile_img } from "../utils/constants";
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const name = useRef(null);
   const email = useRef(null);
@@ -26,7 +25,6 @@ const Login = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    console.log("55555555555");
     const message = validateData(email.current.value, password.current.value);
     if (message) {
       setErrorMessage(message);
@@ -44,14 +42,12 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/67271792?v=4",
+            photoURL: profile_img,
           })
             .then(() => {
               // Profile updated!
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(addUser({ uid, email, displayName, photoURL }));
-
-              navigate("/browse");
             })
             .catch((error) => {
               // An error occurred
@@ -75,10 +71,7 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
-          const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
-          // ...
+          console.log(userCredential);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -93,7 +86,7 @@ const Login = () => {
       <div className="absolute">
         <img src={Login_Img} alt="logo" />
       </div>
-      <form className="w-3/12 absolute p-12 bg-black my-36 mx-auto right-0 left-0 text-white rounded-lg bg-opacity-80">
+      <form className="w-3/12 absolute p-12 bg-black-80/100 my-36 mx-auto right-0 left-0 text-white rounded-lg">
         <h1 className="font-bold text-3xl py-3">
           {isSignIn ? "Sign in" : "Sign Up"}
         </h1>

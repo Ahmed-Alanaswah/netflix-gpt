@@ -6,11 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeUser, addUser } from "../utils/userSlice";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
+import { showGptSearch } from "../utils/gptSlice";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+
+  const handleShowGpt = () => {
+    dispatch(showGptSearch());
+  };
 
   const handleSignOut = () => {
     signOut(auth)
@@ -48,10 +53,16 @@ const Header = () => {
       <div className="absolute px-8 py-2 bg-gradient-to-b from-black to-transparent w-screen flex justify-between z-10">
         <img className="w-44" src={Logo_Img} alt="logo" />
         {user && (
-          <div className="flex p-2 w-20">
-            <img src={user?.photoURL} alt="profile image" />
+          <div className="flex p-2 ">
             <button
-              className="text-white font-bold w-full cursor-pointer"
+              className="text-white w-20 cursor-pointer bg-red-500"
+              onClick={handleShowGpt}
+            >
+              show gpt
+            </button>
+            <img src={user?.photoURL} alt="profile image" className="w-20" />
+            <button
+              className="text-white font-bold  cursor-pointer"
               onClick={handleSignOut}
             >
               Sign Out

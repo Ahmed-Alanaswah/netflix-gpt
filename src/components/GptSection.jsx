@@ -6,9 +6,13 @@ const GptSection = () => {
   return (
     <div>
       <div className="absolute -z-10">
-        <img src={Login_Img} alt="logo" />
+        <img
+          className="h-screen object-cover md:h-auto "
+          src={Login_Img}
+          alt="logo"
+        />
       </div>
-      <div className="pt-[10%]">
+      <div className="pt-[50%] md:pt-[20%]">
         <SearchBar />
         <GptMoviesList />
       </div>

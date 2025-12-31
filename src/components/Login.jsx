@@ -80,9 +80,13 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img src={Login_Img} alt="logo" />
+        <img
+          className="h-screen object-cover md:h-auto"
+          src={Login_Img}
+          alt="logo"
+        />
       </div>
-      <form className="w-3/12 absolute p-12 bg-black-80/100 my-36 mx-auto right-0 left-0 text-white rounded-lg">
+      <form className="w-full md:w-3/12 absolute p-12 bg-black/60 my-36 mx-auto right-0 left-0 text-white rounded-lg">
         <h1 className="font-bold text-3xl py-3">
           {isSignIn ? "Sign in" : "Sign Up"}
         </h1>

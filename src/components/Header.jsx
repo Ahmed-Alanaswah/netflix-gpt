@@ -50,17 +50,21 @@ const Header = () => {
 
   return (
     <>
-      <div className="absolute px-8 py-2 bg-gradient-to-b from-black to-transparent w-screen flex justify-between z-10">
-        <img className="w-44" src={Logo_Img} alt="logo" />
+      <div className="absolute px-8 py-2 bg-gradient-to-b from-black to-transparent w-screen flex justify-between z-10 flex-col md:flex-row">
+        <img className="w-44 mx-auto md:mx-0" src={Logo_Img} alt="logo" />
         {user && (
-          <div className="flex p-2 ">
+          <div className="flex p-2 justify-between">
             <button
               className="text-white w-20 cursor-pointer bg-red-500"
               onClick={handleShowGpt}
             >
-              {showGpt ? "show gpt" : "home page"}
+              {!showGpt ? "show gpt" : "home page"}
             </button>
-            <img src={user?.photoURL} alt="profile image" className="w-20" />
+            <img
+              src={user?.photoURL}
+              alt="profile image"
+              className="w-20 hidden md:block"
+            />
             <button
               className="text-white font-bold  cursor-pointer"
               onClick={handleSignOut}

@@ -45,7 +45,7 @@ const SearchBar = () => {
     }
   };
   return (
-    <div className="bg-black w-1/2 p-4 m-auto ">
+    <div className="bg-black w-full md:w-1/2 p-4 m-auto ">
       <form className="flex gap-5" onSubmit={(e) => e.preventDefault()}>
         <input
           ref={searchText}

@@ -12,7 +12,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-
+  const showGpt = useSelector((state) => state.gpt.showGptSearch);
   const handleShowGpt = () => {
     dispatch(showGptSearch());
   };
@@ -58,7 +58,7 @@ const Header = () => {
               className="text-white w-20 cursor-pointer bg-red-500"
               onClick={handleShowGpt}
             >
-              show gpt
+              {showGpt ? "show gpt" : "home page"}
             </button>
             <img src={user?.photoURL} alt="profile image" className="w-20" />
             <button

@@ -1,9 +1,12 @@
 import { useRef } from "react";
 import { client } from "../utils/openAiUtils";
 import { api_options } from "../utils/constants";
+import { addSerchMoviesResults } from "../utils/gptSlice";
+import { useDispatch } from "react-redux";
+
 const SearchBar = () => {
   const searchText = useRef(null);
-
+  const dispatch = useDispatch();
   const searchMovieTMDB = async (searchQuery) => {
     const res = await fetch(
       `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(
@@ -34,18 +37,12 @@ const SearchBar = () => {
       const promisesArray = gptMovies.map((movie) => searchMovieTMDB(movie));
 
       const results = await Promise.all(promisesArray);
-      console.log(results);
-    } catch (error) {
-      // const promisesArray = gptMovies.map((movie) => searchMovieTMDB(movie));
-      const results = await searchMovieTMDB(searchText.current.value);
-      // const results =  promise.then((res) => res);
-      console.log("5666666", results);
-      // console.log("555555555555", error);
-    }
 
-    // if (!completion.choices) {
-    //   console.log("555555555555");
-    // }
+      dispatch(addSerchMoviesResults(results));
+    } catch (error) {
+      const results = await searchMovieTMDB(searchText.current.value);
+      dispatch(addSerchMoviesResults(results));
+    }
   };
   return (
     <div className="bg-black w-1/2 p-4 m-auto ">

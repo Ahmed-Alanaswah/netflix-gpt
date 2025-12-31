@@ -1,4 +1,4 @@
-Oexport const Logo_Img =
+export const Logo_Img =
   "https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production_2025-12-03/consent/87b6a5c0-0104-4e96-a291-092c11350111/019ae4b5-d8fb-7693-90ba-7a61d24a8837/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png";
 
 export const Login_Img =
@@ -11,8 +11,7 @@ export const api_options = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMGZlODk0YzhjZTliMzdhZTg5YmVlODUzNTAyMGM4ZCIsIm5iZiI6MTYzMTcxNDY3OC40NDgsInN1YiI6IjYxNDFmZDc2OTRkOGE4MDAyN2E2Mzk0YiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.CrFtv3meDyd5aXAoVGSZUbdXBqdc-PFnYcxvp2pJwqw",
+    Authorization: `Bearer ${import.meta.env.VITE_TMDB_KEY}`,
   },
 };
 
